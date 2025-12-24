@@ -5,7 +5,6 @@ import de.maxhenkel.voicechat.voice.client.ClientManager;
 import de.maxhenkel.voicechat.voice.common.PlayerState;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
-import net.minecraft.client.render.entity.state.PlayerEntityRenderState;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.Entity;
 import net.minecraft.text.Text;
@@ -37,17 +36,18 @@ public class VolumeScroll {
         return false;
     }
 
-    public static void modifyNamePlateText(PlayerEntityRenderState state) {
+    public static Text modifyNamePlateText(int id, Text backup) {
         ClientWorld world = MinecraftClient.getInstance().world;
         if (world != null) {
-            Entity entity = world.getEntityById(state.id);
+            Entity entity = world.getEntityById(id);
             if (entity != null) {
                 VolumeMessage volumeMessage = VOLUME_MESSAGES.get(entity.getUuid());
                 if (volumeMessage != null && (System.currentTimeMillis() - volumeMessage.timestamp) < 3000L) {
-                    state.displayName = volumeMessage.text;
+                    return volumeMessage.text;
                 }
             }
         }
+        return backup;
     }
 
     private record VolumeMessage(Text text, long timestamp) {

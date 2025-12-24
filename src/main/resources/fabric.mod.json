@@ -5,7 +5,8 @@
   "name": "VolumeScroll",
   "description": "Adjust Simple Voice Chat players volume with RMB + Mouse Wheel Scroll",
   "authors": [
-    "DimasKama"
+    "DimasKama",
+    "Sanya Alabai"
   ],
   "license": "All-Rights-Reserved",
   "icon": "assets/volumescroll/icon.png",
@@ -15,7 +16,7 @@
   ],
   "depends": {
     "fabricloader": ">=0.16.7",
-    "minecraft": ">=1.21.9",
+    "minecraft": ">=1.21.1",
     "java": ">=21",
     "fabric-api": "*",
     "voicechat": "*"

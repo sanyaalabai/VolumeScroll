@@ -1,6 +1,5 @@
 package ru.dimaskama.volumescroll.mixin;
 
-import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.client.Mouse;
 import org.joml.Vector2i;
 import org.spongepowered.asm.mixin.Mixin;
@@ -9,6 +8,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import ru.dimaskama.volumescroll.VolumeScroll;
 
+@SuppressWarnings("unused")
 @Mixin(Mouse.class)
 abstract class MouseMixin {
 
@@ -20,7 +20,8 @@ abstract class MouseMixin {
             ),
             cancellable = true
     )
-    private void handleMouseScroll(CallbackInfo ci, @Local Vector2i vector) {
+    private void handleMouseScroll(long window, double h, double v, CallbackInfo ci) {
+        Vector2i vector=new Vector2i((int)h, (int)v);
         if (VolumeScroll.handleScroll(vector)) {
             ci.cancel();
         }
